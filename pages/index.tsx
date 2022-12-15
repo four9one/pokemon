@@ -2,6 +2,7 @@ import type { NextPage } from "next"
 import Head from "next/head"
 import Image from "next/image"
 import { useReducer, useState } from "react"
+import useInterval from "./hooks/useInterval"
 
 const initialState = { count: 0 }
 // An interface for our actions
@@ -29,6 +30,19 @@ function reducer(state: CountState, action: CountAction) {
 
 const Home: NextPage = () => {
   const [counter, dispatch] = useReducer(reducer, initialState)
+  const [delay, setDelay] = useState<number>(1000)
+  // ON/OFF
+  const [isPlaying, setPlaying] = useState<boolean>(false)
+
+  useInterval(
+    () => {
+      // Your custom logic here
+      dispatch({ type: "increment" })
+    },
+    // Delay in milliseconds or null to stop it
+    isPlaying ? delay : null
+  )
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-2">
       <Head>
@@ -49,6 +63,24 @@ const Home: NextPage = () => {
         </p>
         <div className="rounded-md bg-blue-600 mt-4 text-zinc-200 p-4 w-44 text-xl">
           {counter.count}
+        </div>
+        <div className="flex gap-6 [&>*]:cursor-pointer">
+          <div
+            onClick={() => setPlaying((state) => true)}
+            className={`${
+              !isPlaying ? "bg-green-600" : "bg-gray-600"
+            } rounded-md  mt-4 text-zinc-200 p-4 w-44 text-xl`}
+          >
+            Start
+          </div>
+          <div
+            onClick={() => setPlaying((state) => false)}
+            className={`${
+              isPlaying ? "bg-green-600" : "bg-gray-600"
+            } rounded-md  mt-4 text-zinc-200 p-4 w-44 text-xl`}
+          >
+            Stop
+          </div>
         </div>
 
         <div className="mt-6 flex max-w-4xl flex-wrap items-center hover:[&>*]:cursor-pointer justify-around sm:w-full hover:[&>*]:bg-gray-400 hover:[&>*]:text-white">
@@ -84,9 +116,8 @@ const Home: NextPage = () => {
 
           <div
             onClick={() => {
-              setInterval(() => {
-                dispatch({ type: "increment" })
-              }, 1000)
+              // startInterval()
+              setPlaying((state) => true)
             }}
             className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
           >
