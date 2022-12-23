@@ -1,14 +1,14 @@
 import React, { useState } from "react"
 
 interface FormValues {
-  firstName: string
+  firstName: number
   lastName: string
   email: string
 }
 
 const FormPopup: React.FC = () => {
   const [formValues, setFormValues] = useState<FormValues>({
-    firstName: "",
+    firstName: 0,
     lastName: "",
     email: "",
   })
@@ -28,12 +28,10 @@ const FormPopup: React.FC = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
-    console.log("event.target", event.target[0].value)
-    let result = doubleAndSubtractFive(event.target[0].value)
+    console.log("formValues", formValues)
+    // setState((state) => result)
 
-    setState((state) => result)
-
-    console.log("result", result)
+    // console.log("result", result)
     // Add your submit logic here
   }
 
@@ -72,7 +70,12 @@ const FormPopup: React.FC = () => {
           onChange={handleChange}
         />
         <br />
-        <button type="submit">Submit</button>
+        <button
+          type="submit"
+          className="bg-gray-200 rounded border border-cyan-500"
+        >
+          Submit
+        </button>
       </form>
     </div>
   )
