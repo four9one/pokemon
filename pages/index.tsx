@@ -4,6 +4,7 @@ import Image from "next/image"
 import { useReducer, useState } from "react"
 import FormPopup from "./FormPopup"
 import useInterval from "./hooks/useInterval"
+import ToggleComponent from "./ToggleComponent"
 
 const initialState = { count: 0 }
 // An interface for our actions
@@ -51,6 +52,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <FormPopup />
+      <ToggleComponent />
 
       <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
         <h1 className="text-6xl font-bold">
