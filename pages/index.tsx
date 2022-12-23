@@ -6,6 +6,9 @@ import FormPopup from "./FormPopup"
 import useInterval from "./hooks/useInterval"
 import ToggleComponent from "./ToggleComponent"
 
+import bg from "./dalle1.png"
+import Majja from "./Majja"
+
 const initialState = { count: 0 }
 // An interface for our actions
 interface CountAction {
@@ -46,15 +49,23 @@ const Home: NextPage = () => {
   )
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
+    <div
+      className="flex min-h-screen flex-col items-center justify-center py-2"
+      style={{
+        backgroundImage: `url(${bg.src})`,
+        backgroundSize: "cover",
+        height: "100vh",
+      }}
+    >
       <Head>
         <title>Nivili</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <FormPopup />
-      <ToggleComponent />
+      <Majja />
+      {/* <FormPopup />
+      <ToggleComponent /> */}
 
-      <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
+      {/* <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
         <h1 className="text-6xl font-bold">
           Welcome to <div className="text-blue-600 inline-block">Nivili!</div>
         </h1>
@@ -143,7 +154,7 @@ const Home: NextPage = () => {
           Powered by{" "}
           <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
         </a>
-      </footer>
+      </footer> */}
     </div>
   )
 }
